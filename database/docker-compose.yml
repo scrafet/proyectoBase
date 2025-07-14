@@ -1,0 +1,22 @@
+# database/docker-compose.yml (para PostgreSQL)
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine # Una imagen ligera de PostgreSQL 16
+    container_name: clinica_db_postgres
+    environment:
+      POSTGRES_DB: clinica_db
+      POSTGRES_USER: user # Debe coincidir con el usuario en DATABASE_URL
+      POSTGRES_PASSWORD: Password123. # ¡CAMBIA ESTO! Debe coincidir con la de .env
+    ports:
+      - "5432:5432" # Mapea el puerto estándar de PostgreSQL
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data # Persistencia de datos
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql # Ejecuta el script SQL al inicio
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d clinica_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
