@@ -659,3 +659,15 @@ CREATE TABLE verificaciones_cuenta (
   estado estado_verificacion DEFAULT 'pendiente', -- Usando el tipo ENUM personalizado
   CONSTRAINT fk_verificaciones_cuenta_usuarios FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE
 );
+
+-- Volcando estructura para tabla items
+CREATE TABLE items (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    description TEXT,
+    is_active BOOLEAN DEFAULT TRUE
+);
+
+-- Crear índices para la tabla items
+CREATE INDEX ix_items_title ON items (title);
+CREATE INDEX ix_items_description ON items (description);
