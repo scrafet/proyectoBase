@@ -1,8 +1,6 @@
 # backend/app/models/item.py
 from sqlalchemy import Column, Integer, String, Boolean
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
+from backend.app.db.base import Base
 
 class Item(Base):
     __tablename__ = "items" # Nombre de la tabla en la base de datos

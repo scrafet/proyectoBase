@@ -2,7 +2,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from backend.app.core.config import settings # Importa la configuración de la app
-from backend.app.models.item import Base # Importa la base declarativa
+from backend.app.db.base import Base # Importa la base declarativa
 
 # Crea el motor de la base de datos usando la URL de configuración
 engine = create_engine(settings.DATABASE_URL)
